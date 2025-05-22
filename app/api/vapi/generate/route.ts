@@ -60,7 +60,7 @@ export async function POST(request: Request) {
             role,
             type,
             level,
-            techstack: techstack ? techstack.split(',') : [],
+            techstack: techstack.split(','),
             questions: parsedQuestions,
             userId: userid,
             finalized: true,
