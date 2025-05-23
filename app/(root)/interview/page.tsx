@@ -1,5 +1,4 @@
 import Agents from "@/components/Agents";
-import React from 'react'
 import {getCurrentUser} from "@/lib/actions/auth.action";
 
 const Page = async () => {
