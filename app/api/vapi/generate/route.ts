@@ -10,7 +10,7 @@ export async function GET() {
 export async function POST(request: Request) {
 
     try {
-        const { type, role, level, techstack, amount, userid, industry } = await request.json();
+        const { type, role, level, techstack, amount, userId, industry } = await request.json();
 
         const { text: questions } = await generateText({
             model: google('gemini-2.0-flash-001'),
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
             level,
             techstack: techstack.split(','),
             questions: parsedQuestions,
-            userId: userid,
+            userId: "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1",
             finalized: true,
             coverImage: getRandomInterviewCover(),
             createdAt: new Date().toISOString()

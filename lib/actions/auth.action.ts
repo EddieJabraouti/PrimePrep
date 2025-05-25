@@ -2,6 +2,8 @@
 import { db, auth } from "@/firebase/admin"
 import {cookies} from "next/headers";
 
+
+
 const ONE_WEEK = 60 * 60 * 24 * 7 * 1000;
 
 export async function signUp(params: SignUpParams){
@@ -113,3 +115,39 @@ export async function isAuthenticated() {
 
     return !!user;
 }
+
+export async function getInterviewsByUserId(
+    userId: string
+): Promise<Interview[] | null> {
+    const interviews = await db
+        .collection('interviews')
+        .where('userId', '==', "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1" )
+        .orderBy('createdAt', 'desc')
+        .get();
+
+    return interviews.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as Interview[];
+}
+
+
+export async function getLatestInterviews(
+    params: GetLatestInterviewsParams
+): Promise<Interview[] | null> {
+    const { userId, limit = 20 } = params;
+
+    const interviews = await db
+        .collection("interviews")
+        .orderBy("createdAt", "desc")
+        .where("finalized", "==", true)
+        .where("userId", "!=", "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1")
+        .limit(limit)
+        .get();
+
+    return interviews.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as Interview[];
+}
+
