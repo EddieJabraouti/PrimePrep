@@ -68,13 +68,14 @@ const AuthForm = ({type}: {type: FormType}) => {
 
                 const idToken = await userCredentials.user.getIdToken();
 
-                if(!idToken) {
-                    toast.error("Invalid Credentials");
+                if(!userCredentials.user) {
+                    toast.message("Invalid Credentials");
                     return;
                 }
 
                 await signIn({
                     email, idToken
+
                 })
 
                 toast.success("Signed in!")
@@ -82,7 +83,7 @@ const AuthForm = ({type}: {type: FormType}) => {
             }
         } catch (error) {
             console.error(error);
-            toast.error(`There was an error: ${error}`)
+            toast.error(`${error}`)
         }
 
         console.log(values)
