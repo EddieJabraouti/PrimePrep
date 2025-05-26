@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {vapi} from '@/lib/vapi.sdk'
 import {interviewer} from "@/constants";
+import { createFeedback } from "@/lib/actions/general.action"
 
 
 enum CallStatus {
@@ -33,6 +34,7 @@ interface AgentProps {
     userName: string;
     userId: string;
     type: string;
+    interviewId: string;
 }
 
 const Agents = ( { userName, userId, type, interviewId, questions }: AgentProps) => {
@@ -75,14 +77,16 @@ const Agents = ( { userName, userId, type, interviewId, questions }: AgentProps)
         }
     }, []);
 
-    const handleGenerateFeedback = async (message: SavedMessage[]) => {
+    const handleGenerateFeedback = async (messages: SavedMessage[]) => {
         console.log("generate feedback here");
 
-        //NEED TO STILL CREATE SERVER ACTION THAT GENERATES FEEBACK
-        const { success, id} = {
-            success: true,
-            id: 'feedback-id'
-        }
+        const { success, feedbackId: id } = await createFeedback({
+            interviewId: interviewId!,
+            userId: "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1",
+            transcript: messages
+        });
+
+
         if(success && id) {
            router.push(`/interview/${interviewId}/feedback`)
         } else {
