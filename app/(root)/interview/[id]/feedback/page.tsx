@@ -24,7 +24,7 @@ const Page = async ({params}: RouteParams) => {
     return (
         <section className="section-feedback">
             <div className="flex flex-row justify-center">
-                <h1 className="text=4xl font-semibold">
+                <h1 className="text-4xl font-semibold text-white">
                     Feedback on Interview -{" "}
                     <span className="capitalize">{interview.role}</span> Interview
                 </h1>
@@ -34,9 +34,9 @@ const Page = async ({params}: RouteParams) => {
                 <div className="flex flex-row gap-5">
                     <div className="flex flex-row gap-2 items-center">
                         <Image src="/star.svg" width={22} height={22} alt="star icon" />
-                        <p>
+                        <p className="text-white">
                             Overall Impression:{" "}
-                            <span className="text-primary-200 font-bold">
+                            <span className="text-white font-bold">
                                 {feedback?.totalScore}
                             </span>
                             /100
@@ -44,7 +44,7 @@ const Page = async ({params}: RouteParams) => {
                     </div>
                     <div className="flex flex-row gap-2">
                         <Image src="/calendar.svg" width={22} height={22} alt="calendar" />
-                        <p>
+                        <p className="text-white">
                             {feedback?.createdAt ? dayjs (feedback.createdAt).format("YYYY, MMMM-DD") : "N/A"}
                         </p>
                     </div>
@@ -53,38 +53,38 @@ const Page = async ({params}: RouteParams) => {
 
             <hr/>
 
-            <p>{feedback?.finalAssessment}</p>
+            <p className="text-white">{feedback?.finalAssessment}</p>
 
             <div className="flex flex-col gap-4">
-                <h2>Interview Breakdown:</h2>
+                <h2 className="text-white">Interview Breakdown:</h2>
                 {feedback?.categoryScores?.map((category, index) => (
                     <div key={index}>
-                        <p className="font-bold">
+                        <p className="font-bold text-white">
                             {index + 1}. {category.name} ({category.score}/100)
                         </p>
-                        <p>{category.comment}</p>
+                        <p className="text-white">{category.comment}</p>
                     </div>
                 ))}
             </div>
 
             <div className="flex flex-col gap-3">
-                <h3>Strengths</h3>
+                <h3 className="text-white" >Strengths</h3>
                 <ul>
                     {feedback?.strengths && feedback.strengths.length > 0 ? (
                         feedback.strengths.map((strength, index) => (
-                            <li key={index}>{strength}</li>
+                            <li className="text-white" key={index}>{strength}</li>
                         ))
                     ) : (
-                        <li>None</li>
+                        <li className="text-white">None</li>
                     )}
                 </ul>
             </div>
 
             <div className="flex flex-col gap-3">
-                <h3>Areas for Improvement</h3>
-                <ul>
+                <h3 className="text-white">Areas for Improvement</h3>
+                <ul className="text-white">
                     {feedback?.areasForImprovement?.map((areas, index) => (
-                        <li key={index}>{areas}</li>
+                        <li className="text-white" key={index}>{areas}</li>
                     ))}
                 </ul>
             </div>
@@ -92,7 +92,7 @@ const Page = async ({params}: RouteParams) => {
             <div className="buttons">
                 <Button className="btn-secondary flex-1">
                     <Link href="/" className="flex w-full justify-center">
-                        <p className="text-sm font-sembold text-primary-200 text-center">
+                        <p className="text-sm font-sembold text-black text-center">
                             Back to frontpage
                         </p>
                     </Link>
@@ -100,7 +100,7 @@ const Page = async ({params}: RouteParams) => {
 
                 <Button className="btn-secondary flex-1">
                     <Link href={`/interview/${id}`} className="flex w-full justify-center">
-                        <p className="text-sm font-semibold text-primary-200 text-center">
+                        <p className="text-sm font-semibold text-black text-center">
                             Retake The Interview
                         </p>
                     </Link>

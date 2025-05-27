@@ -155,7 +155,7 @@ const Agents = ( { userName, userId, type, interviewId, questions }: AgentProps)
                     <div className="card-content">
                         <Image src="/User-avatar.svg.png" alt="user-avatar" width={540} height={540} className="rounded-full object-cover size-[120px]"/>
                         {isSpeaking && <span className="animate-speak"/>}
-                        <h3>You</h3>
+                        <h3 className="text-white">You</h3>
                     </div>
                 </div>
             </div>

@@ -24,8 +24,8 @@ const Page = async () => {
         <>
             <section className="card-cta">
                 <div className="flex flex-col gap-6 max-w-lg">
-                    <h2>Dominate Your Interviews with AI Powered Mock Interviews & Detailed Feedback</h2>
-                    <p className="text-lg">
+                    <h2 className="text-white">Dominate Your Interviews with AI Powered Mock Interviews & Detailed Feedback</h2>
+                    <p className="text-lg text-white">
                         Practice with realistic interview style questions & receive instant feedback
                     </p>
                     <Button asChild className="btn-primary max-sm:w-full">
@@ -34,7 +34,7 @@ const Page = async () => {
                 </div>
             </section>
             <section className="flex flex-col gap-6 mt-8">
-                <h2>Your Interviews:</h2>
+                <h2 className="text-white">Your Interviews:</h2>
                 <div className="interviews-section">
                     {hasPastInterviews ? (
                         userInterviews?.map((interview) => (
@@ -47,14 +47,14 @@ const Page = async () => {
                 </div>
             </section>
             <section className="flex flex-col gap-6 mt-8">
-                <h2>Take an Interview</h2>
+                <h2 className="text-white">Take an Interview</h2>
                 <div className="interviews-section">
                     {hasUpcomingOInterviews ? (
                         latestInterviews?.map((interview) => (
                             <InterviewCard{...interview} key={interview.id} />
 
                         ))) : (
-                        <p>There are no new interviews available</p>
+                        <p className="text-white">There are no new interviews available</p>
                     )}
                 </div>
             </section>
