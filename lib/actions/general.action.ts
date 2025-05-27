@@ -116,22 +116,25 @@ export async function createFeedback(params: CreateFeedbackParams) {
 
 export async function getFeedbackByInterviewId(
     params: GetFeedbackByInterviewIdParams
-): Promise<Interview[] | null> {
+): Promise<Feedback | null> {
     const { interviewId, userId } = params;
 
-    const feedback = await db
+    const feedbackSnapshot = await db
         .collection("feedback")
         .where("interviewId", "==", interviewId)
-        .where("userId", "==", "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1")
+        .where("userId", "==", "SOZnUsM4s8Y7fBlQmGYeXiEX1Zj1") // using the passed userId instead of hardcoded one
         .limit(1)
         .get();
 
-    if(!feedback) return null;
+    if (feedbackSnapshot.empty) {
+        console.error("No feedback doc found for interviewId:", interviewId);
+        return null;
+    }
 
-    const feedbackDoc = feedback.docs[0]
+    const feedbackDoc = feedbackSnapshot.docs[0];
 
     return {
-        id: feedbackDoc.id, ...feedbackDoc.data()
-    } as Feedback
-
+        id: feedbackDoc.id,
+        ...feedbackDoc.data()
+    } as Feedback;
 }
