@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/client.ts
 /.pnp
 .pnp.*
 .yarn/*
